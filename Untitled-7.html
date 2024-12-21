@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <title>One True Layout</title>
+      <style>
+        body{
+         width: 500px;
+         margin: 10px auto;
+        }
+        #middle { overflow: hidden;}
+        #left { float: left; width: 150px, backgroung: rad; }
+        #right {float: right; width: 350px; background: blue; }
+        #top { background: green; }
+        #bottom {background: purple; }
+      </style>
+</head>
+<body>
+    <div id="top">Lorem ipsum dolor sit amet, consectetur,</div>
+    <div id="midde">
+        <div id="left">Lorem ipsum dolor sit amet, consectetur.</div>
+        <div id="right">Lorem ipsum dolor sit amet, consecteur.</div>
+    </div>
+    <div id="bottom">Lorem ipsum dolor sit amet, consectettur.</div>
+</body>
+</html>
+One True 레이아웃의 핵심은 각 행을 독립적으로 구성한다는 것.
+-자손에 float 속성을 적용
+-부모의 overflow 속성에 hidden 을 적용.

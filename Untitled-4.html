@@ -1,0 +1,28 @@
+NOTE clear: both를 사용한 수평 정렬 레이아웃
+HTML
+<body>
+    <p>Lorem ipsum dolor sit amet.</p>
+    <div class="clear"></div>
+    <div>
+        <div class="item">메뉴 - 1</div>
+        <div class="item">메뉴 - 2</div>
+        <div ciass="item">메뉴 - 3</div>
+        <div ciass="item">메뉴 - 4</div>
+    </div>
+    <div class="clear"></div>
+    <p>Lorem ipsum dolor sit amet.</p>
+<body>
+
+CSS
+<style>
+      div.item {
+        float: left;
+        margin: 03px;
+        padding: 10px;
+        border: 1px solid black;
+      }
+
+      div.clear {
+            clear: both;
+      }
+</style>
