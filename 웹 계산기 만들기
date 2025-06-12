@@ -1,0 +1,170 @@
+<!--
+과제 보고서
+
+제출일: 2025년 5월 27일
+소속: 한양여대 빅데이터과
+이름: 김지현
+과제명: HTML/CSS/JavaScript를 활용한 웹 계산기 만들기
+-->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>웹 계산기</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .calculator {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #aaa;
+    }
+    /* 창: 긴 사각형 */
+    #display {
+      width: 320px;
+      height: 50px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 24px;
+      text-align: right;
+      background: #eee;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 70px);
+      grid-gap: 10px;
+    }
+    button {
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+    }
+    /* 숫자 버튼 - 동그라미 */
+    .number {
+      background: #9ddfd3;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+    }
+    /* 사칙연산자 - 네모 */
+    .operator {
+      background: #f1a661;
+      border-radius: 5px;
+      width: 70px;
+      height: 70px;
+    }
+    /* = 버튼, C 버튼 등 기타 연산자 - 오벌 */
+    .equals, .clear {
+      background: #f26b6b;
+      border-radius: 50% / 30%;
+      width: 70px;
+      height: 70px;
+    }
+    .clear {
+      background: #6bc5f2;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <div id="display">0</div>
+  <div class="buttons">
+    <button class="number">7</button>
+    <button class="number">8</button>
+    <button class="number">9</button>
+    <button class="operator">/</button>
+
+    <button class="number">4</button>
+    <button class="number">5</button>
+    <button class="number">6</button>
+    <button class="operator">*</button>
+
+    <button class="number">1</button>
+    <button class="number">2</button>
+    <button class="number">3</button>
+    <button class="operator">-</button>
+
+    <button class="number">0</button>
+    <button class="clear">C</button>
+    <button class="equals">=</button>
+    <button class="operator">+</button>
+  </div>
+</div>
+
+<script>
+  const display = document.getElementById('display');
+  let input = '';
+  let resultDisplayed = false;
+
+  // 숫자 및 연산자 버튼 클릭 처리
+  document.querySelectorAll('.number, .operator').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (resultDisplayed) {
+        input = '';
+        resultDisplayed = false;
+      }
+      input += btn.textContent;
+      display.textContent = input;
+    });
+  });
+
+  // '=' 버튼 클릭 처리
+  document.querySelector('.equals').addEventListener('click', () => {
+    try {
+      // 입력된 수식 계산
+      const answer = eval(input);
+      display.textContent = answer;
+      input = answer.toString();
+      resultDisplayed = true;
+    } catch {
+      display.textContent = '오류';
+      input = '';
+    }
+  });
+  // 'c' 버튼 클릭 처리 (초기화)
+  document.querySelector('.clear').addEventListener('click', () => {
+    input = '';
+    display.textContent = '0';
+    resultDisplayed = false;
+  });
+</script>
+
+</body>
+</html>
+
+<!--
+과제 목표:
+HTML, CSS, JavaScript를 활용하여 웹 브라우저에서 작동하는 계산기를 제작한다. 사용자가 마우스로 버튼을 클릭하여 사칙연산을 수행할 수 있도록 구현한다.
+
+실행 결과 화면:
+웹 브라우저에서 계산기 UI가 출력되며, 숫자 및 사칙연산자 버튼을 클릭하여 실시간으로 결과를 계산할 수 있다.
+
+후기:
+이번 과제를 통해 HTML/CSS 구조와 JavaScript의 이벤트 처리 방식에 대해 더 잘 이해할 수 있었다. 특히 eval() 함수의 위험성과 계산 오류 처리 방법에 대해 학습할 수 있었다. 버튼의 디자인을 CSS로 꾸미는 과정도 흥미로웠으며, 실생활에서 유용한 기능을 직접 구현해보는 경험이 유익했다.
+
+과제를 수행하면서 알게 된 점은, HTML과 CSS로 인터페이스를 구성하는 것보다 실제 동작을 구현하는 JavaScript 부분이 더 어렵게 느껴졌다는 것이다. 또한 사용자 입력에 따라 유연하게 동작하도록 상태를 관리하는 방법과 오류 처리를 포함한 로직 구성의 중요성을 체감했다. 한 줄의 코드가 전체 흐름에 영향을 줄 수 있다는 점에서 디버깅과 테스트의 중요성을 깨달았다.
+
+인라인 코멘드: 인라인 코멘트 추가, 후기 마지막에 finding out 내용을 포함
+finding out:
+과제를 수행하면서 입력한 값을 화면에 표시하는 것과 계산 결과를 다시 이어서 입력하는 기능 사이에서 상태 관리를 어떻게 해야 하는지 고민이 많았다. 특히 resultDisplayed 플래그를 활용하여 새 입력과 결과 표시 후 입력을 구분하는 구조를 설계하면서 JavaScript의 변수 상태 유지 방식에 대해 구체적으로 이해하게 되었다. 또한, 연산자나 숫자 클릭 시 동작 방식의 차이를 고려해 이벤트를 일괄 처리하는 방식으로 설계함으로써 중복되는 코드를 줄이고 유지 보수를 용이하게 만들 수 있다는 점도 깨달았다.
+
+깨달은 점:
+추가로 깨달은 점은 디버깅의 중요성과 작은 코드 변경이 전체 프로그램의 흐름에 어떤 영향을 줄 수 있는지를 직접 체험하며 느꼈다는 것이다. 실시간 계산기처럼 상태 변화가 잦은 애플리케이션에서는 코드의 흐름을 명확히 이해하고 관리하는 것이 매우 중요하다는 것을 알게 되었다.
+
+첫날 했던 진단 과제 이어서 자바스크립트로 구현한 것:
+이 과제는 첫날에 수행했던 진단 과제(HTML/CSS로 만든 정적인 계산기 인터페이스)를 기반으로, JavaScript를 활용하여 실질적인 계산 기능을 추가한 확장 과제입니다. 사용자가 숫자 및 연산자를 누르면 실시간으로 계산되며, 초기화 및 오류 처리 기능도 구현했습니다.
+
+-->
