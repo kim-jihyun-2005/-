@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>전화기</title>
+  <style>
+    #display {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .button {
+      width: 60px;
+      height: 60px;
+      font-size: 20px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="display">전화번호: </div>
+
+  <!-- 버튼 영역 -->
+  <div>
+    <button class="button" onclick="press('1')">1</button>
+    <button class="button" onclick="press('2')">2</button>
+    <button class="button" onclick="press('3')">3</button><br>
+    <button class="button" onclick="press('4')">4</button>
+    <button class="button" onclick="press('5')">5</button>
+    <button class="button" onclick="press('6')">6</button><br>
+    <button class="button" onclick="press('7')">7</button>
+    <button class="button" onclick="press('8')">8</button>
+    <button class="button" onclick="press('9')">9</button><br>
+    <button class="button" onclick="press('*')">*</button>
+    <button class="button" onclick="press('0')">0</button>
+    <button class="button" onclick="press('#')">#</button>
+  </div>
+
+  <script>
+    let input = "";
+
+    function press(value) {
+      if ("0123456789".includes(value)) {
+        if (input.length < 11) {
+          input += value;
+        }
+      }
+
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      let formatted = "";
+      if (input.length <= 3) {
+        formatted = input;
+      } else if (input.length <= 7) {
+        formatted = input.slice(0, 3) + "-" + input.slice(3);
+      } else {
+        formatted = input.slice(0, 3) + "-" + input.slice(3, 7) + "-" + input.slice(7);
+      }
+
+      document.getElementById("display").innerText = "전화번호: " + formatted;
+    }
+  </script>
+
+</body>
+</html>
